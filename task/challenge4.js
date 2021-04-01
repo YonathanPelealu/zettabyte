@@ -14,11 +14,19 @@ Start code here :
 */
 
 const events = require("events");
+const emmit = new events.EventEmitter();
+
 function createEmitter(onOpen, onClose) {
+    emmit.on('open',onOpen);
+    emmit.on('close',onClose);
+
 }
 function opened(emitter) {
+    emmit.emit('open', emitter);
+
 }
 function closed(emitter) {
+    emmit.emit('close', emitter);
 }
 let emitter = createEmitter(
 () => console.log("Opened!"), () => console.log("Closed!")
